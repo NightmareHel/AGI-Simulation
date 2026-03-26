@@ -1,0 +1,14 @@
+# Core graph framework
+langgraph>=0.2.0
+langchain>=0.2.0
+langchain-openai>=0.1.0
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# Search backends (install at least one)
+tavily-python>=0.3.0       # Preferred — requires TAVILY_API_KEY in .env
+wikipedia-api>=0.6.0       # Free fallback — no key needed
+
+# Optional: Streamlit UI (stretch goal)
+# streamlit>=1.35.0
