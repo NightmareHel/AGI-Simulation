@@ -36,18 +36,49 @@ Notes:
 - Keep each research note focused and factual — the Critic grades these
 """
 
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain.schema import SystemMessage, HumanMessage
+
 from state import AgentState
+from tools.search import run_search
+from prompts.researcher_prompt import RESEARCHER_SYSTEM_PROMPT
+
+load_dotenv()
 
 
 def researcher_node(state: AgentState) -> AgentState:
     """
     Receives subtasks (and optional critique), returns state with research_notes populated.
     """
-    # TODO: initialize LLM
-    # TODO: load researcher system prompt
-    # TODO: import and call run_search() from tools/search.py for each subtask
-    # TODO: synthesize search results into research_notes via LLM
-    # TODO: if state["critique"] is non-empty, pass it into the prompt
-    # TODO: return updated state
+    llm = ChatOpenAI(
+        model="gpt-4o-mini",
+        temperature=0.3,
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
+    )
 
-    raise NotImplementedError("Implement researcher_node")
+    critique = state.get("critique", "")
+    subtasks = state.get("subtasks", [])
+    research_notes = []
+
+    for subtask in subtasks:
+        search_results = run_search(subtask)
+
+        user_content = f"Subtask: {subtask}"
+
+        if search_results:
+            user_content += f"\n\nSearch Results:\n{search_results}"
+
+        if critique:
+            user_content += f"\n\nCritique from prior review (address these gaps):\n{critique}"
+
+        messages = [
+            SystemMessage(content=RESEARCHER_SYSTEM_PROMPT),
+            HumanMessage(content=user_content),
+        ]
+
+        response = llm.invoke(messages)
+        research_notes.append(response.content.strip())
+
+    return {**state, "research_notes": research_notes}
