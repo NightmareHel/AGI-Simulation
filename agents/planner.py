@@ -30,18 +30,40 @@ Notes:
 - Do not call external tools here — this is reasoning only
 """
 
+from langchain_groq import ChatGroq
+from langchain_core.messages import SystemMessage, HumanMessage
+
 from state import AgentState
+from prompts.planner_prompt import PLANNER_SYSTEM_PROMPT
+
+
+llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.3)
 
 
 def planner_node(state: AgentState) -> AgentState:
     """
     Receives user_input, returns state with subtasks and domain populated.
     """
-    # TODO: initialize LLM (ChatOpenAI)
-    # TODO: load planner system prompt from prompts/planner_prompt.py
-    # TODO: invoke LLM with user_input
-    # TODO: parse response into list[str] of subtasks
-    # TODO: identify domain from response or a secondary LLM call
-    # TODO: return updated state
+    response = llm.invoke([
+        SystemMessage(content=PLANNER_SYSTEM_PROMPT),
+        HumanMessage(content=state["user_input"]),
+    ])
 
-    raise NotImplementedError("Implement planner_node")
+    text = response.content
+    domain = "general"
+    subtasks = []
+
+    try:
+        for line in text.splitlines():
+            line = line.strip()
+            if line.startswith("DOMAIN:"):
+                domain = line.replace("DOMAIN:", "").strip().lower()
+            elif line and line[0].isdigit() and "." in line:
+                subtasks.append(line.split(".", 1)[1].strip())
+    except Exception:
+        pass
+
+    if not subtasks:
+        subtasks = [text.strip()]
+
+    return {**state, "subtasks": subtasks, "domain": domain}
