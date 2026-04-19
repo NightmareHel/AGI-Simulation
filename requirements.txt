@@ -1,7 +1,7 @@
 # Core graph framework
 langgraph>=0.2.0
 langchain>=0.2.0
-langchain-openai>=0.1.0
+langchain-groq>=0.1.0
 
 # Environment variable management
 python-dotenv>=1.0.0

@@ -22,7 +22,7 @@ What to implement:
 5. Return updated state with research_notes populated
 
 LLM config:
-- Model: gpt-4o-mini
+- Model: llama-3.3-70b-versatile (via Groq)
 - Temperature: 0.3
 
 Search tool:
@@ -38,7 +38,7 @@ Notes:
 
 import os
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain.schema import SystemMessage, HumanMessage
 
 from state import AgentState
@@ -52,10 +52,10 @@ def researcher_node(state: AgentState) -> AgentState:
     """
     Receives subtasks (and optional critique), returns state with research_notes populated.
     """
-    llm = ChatOpenAI(
-        model="gpt-4o-mini",
+    llm = ChatGroq(
+        model="llama-3.3-70b-versatile",
         temperature=0.3,
-        openai_api_key=os.getenv("OPENAI_API_KEY"),
+        groq_api_key=os.getenv("GROQ_API_KEY"),
     )
 
     critique = state.get("critique", "")
