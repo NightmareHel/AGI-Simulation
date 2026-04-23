@@ -44,5 +44,8 @@ class AgentState(TypedDict):
     # Number of times the critic has sent flow back to the researcher
     iteration_count: int
 
+    # Fact Checker output: list of flagged unverified or contradicted claims
+    flagged_claims: list[str]
+
     # Presenter output: the final formatted response shown to the user
     final_output: str
