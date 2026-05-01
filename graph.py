@@ -32,6 +32,7 @@ How to extend:
 from langgraph.graph import StateGraph, END
 
 from state import AgentState
+from agents.query_rewriter import query_rewriter_node
 from agents.planner import planner_node
 from agents.researcher import researcher_node
 from agents.critic import critic_node
@@ -58,15 +59,17 @@ def build_graph() -> StateGraph:
     graph = StateGraph(AgentState)
 
     # Register nodes
+    graph.add_node("query_rewriter", query_rewriter_node)
     graph.add_node("planner", planner_node)
     graph.add_node("researcher", researcher_node)
     graph.add_node("critic", critic_node)
     graph.add_node("presenter", presenter_node)
 
     # Set entry point
-    graph.set_entry_point("planner")
+    graph.set_entry_point("query_rewriter")
 
     # Linear edges
+    graph.add_edge("query_rewriter", "planner")
     graph.add_edge("planner", "researcher")
     graph.add_edge("researcher", "critic")
 

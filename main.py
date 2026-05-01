@@ -44,6 +44,7 @@ load_dotenv()
 def run(user_input: str) -> str:
     """Invoke the graph for a single user input. Returns final_output."""
     initial_state: AgentState = {
+        "original_input": "",
         "user_input": user_input,
         "subtasks": [],
         "domain": "",

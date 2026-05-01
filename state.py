@@ -23,7 +23,10 @@ from typing import TypedDict, Optional
 
 
 class AgentState(TypedDict):
-    # Raw input from the user
+    # Raw input from the user (preserved by query_rewriter before rewriting)
+    original_input: str
+
+    # Rewritten input — cleaned and clarified by the query_rewriter, used by all downstream agents
     user_input: str
 
     # Planner output: list of subtasks broken down from the user request
