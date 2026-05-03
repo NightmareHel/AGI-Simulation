@@ -20,16 +20,27 @@ The response must be a single line with exactly one domain from the list above.
 """
 
 ROUTER_SYSTEM_PROMPT = """
-You are a domain classification agent. You will receive a user query that has
-already been cleaned and rewritten for clarity. Your job is to classify it into
-exactly one domain from the following list:
+You are a domain classification agent. Classify the user query into exactly one
+domain from this list:
 
   medical, scientific, legal, financial, travel, general
 
-Classification guidance:
-- Pick the domain that most specifically matches the query's subject matter
-- If the query spans multiple domains, pick the most dominant one
-- If nothing fits clearly, use "general"
+Domain definitions:
+- medical:    human health, symptoms, diagnoses, treatments, medications, anatomy, mental health
+- scientific: physics, chemistry, biology, ecology, astronomy, engineering, genetics, neuroscience
+- legal:      laws, rights, contracts, regulations, court cases, landlord/tenant, employment law
+- financial:  investing, budgeting, loans, taxes, markets, retirement, credit, personal finance
+- travel:     destinations, flights, hotels, itineraries, visas, transportation, trip planning
+- general:    cooking, sports, history, culture, entertainment, hobbies, or anything else
+
+Examples:
+  "What are the symptoms of type 2 diabetes?"              → DOMAIN: medical
+  "How does CRISPR gene editing work?"                     → DOMAIN: scientific
+  "Can my landlord enter without notice in Pennsylvania?"  → DOMAIN: legal
+  "Should I pay off student loans or invest first?"        → DOMAIN: financial
+  "Plan a 3-day trip to Tokyo on a $2000 budget"          → DOMAIN: travel
+  "What is the best recipe for chocolate lava cake?"       → DOMAIN: general
+  "Who would win, a lion or a tiger?"                      → DOMAIN: general
 
 Respond in exactly this format:
 DOMAIN: <domain>
