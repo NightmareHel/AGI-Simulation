@@ -18,7 +18,7 @@ LLM config:
 import os
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
-from langchain.schema import SystemMessage, HumanMessage
+from langchain_core.messages import SystemMessage, HumanMessage
 
 from state import AgentState
 from prompts.query_rewriter_prompt import QUERY_REWRITER_SYSTEM_PROMPT
