@@ -26,21 +26,41 @@ domain from this list:
   medical, scientific, legal, financial, travel, general
 
 Domain definitions:
-- medical:    human health, symptoms, diagnoses, treatments, medications, anatomy, mental health
-- scientific: physics, chemistry, biology, ecology, astronomy, engineering, genetics, neuroscience
-- legal:      laws, rights, contracts, regulations, court cases, landlord/tenant, employment law
-- financial:  investing, budgeting, loans, taxes, markets, retirement, credit, personal finance
-- travel:     destinations, flights, hotels, itineraries, visas, transportation, trip planning
-- general:    cooking, sports, history, culture, entertainment, hobbies, or anything else
+- medical:    anything about human health — symptoms, diseases, diagnoses, treatments,
+              medications, drugs, mental health, nutrition, anatomy, medical conditions
+- scientific: natural sciences and engineering — physics, chemistry, biology, genetics,
+              neuroscience, ecology, astronomy, materials science, computer science theory
+- legal:      laws, rights, regulations, contracts, court cases, landlord/tenant issues,
+              employment law, criminal law, civil disputes, legal procedures
+- financial:  money and personal finance — investing, budgeting, loans, student debt,
+              taxes, markets, retirement, credit scores, insurance, economics
+- travel:     trip planning — destinations, flights, hotels, itineraries, visas,
+              transportation, packing, travel costs, tourist attractions
+- general:    everything else — cooking, sports, history, culture, entertainment,
+              hobbies, animals, food, games, hypotheticals, opinions
+
+Critical rules:
+- NEVER output "research" — it is not a valid domain
+- Any question about a disease, condition, symptom, or treatment → medical
+- Any question about a scientific concept, mechanism, or technology → scientific
+- Any question about money, debt, loans, or investing → financial
+- Any question about laws, rights, or legal procedures → legal
+- When in doubt between scientific and medical: if it involves the human body → medical
 
 Examples:
-  "What are the symptoms of type 2 diabetes?"              → DOMAIN: medical
-  "How does CRISPR gene editing work?"                     → DOMAIN: scientific
-  "Can my landlord enter without notice in Pennsylvania?"  → DOMAIN: legal
-  "Should I pay off student loans or invest first?"        → DOMAIN: financial
-  "Plan a 3-day trip to Tokyo on a $2000 budget"          → DOMAIN: travel
-  "What is the best recipe for chocolate lava cake?"       → DOMAIN: general
-  "Who would win, a lion or a tiger?"                      → DOMAIN: general
+  "What are the symptoms of type 2 diabetes?"                      → DOMAIN: medical
+  "What are treatment options for managing type 2 diabetes?"       → DOMAIN: medical
+  "How does the immune system fight infections?"                    → DOMAIN: medical
+  "How does CRISPR gene editing work?"                             → DOMAIN: scientific
+  "What are the current applications of CRISPR in biotechnology?"  → DOMAIN: scientific
+  "How does quantum computing work?"                               → DOMAIN: scientific
+  "Can my landlord enter without notice in Pennsylvania?"          → DOMAIN: legal
+  "What are tenant rights under Pennsylvania law?"                 → DOMAIN: legal
+  "Should I pay off student loans or invest first?"                → DOMAIN: financial
+  "What is the best strategy for paying off debt while saving?"    → DOMAIN: financial
+  "Plan a 3-day trip to Tokyo on a $2000 budget"                  → DOMAIN: travel
+  "What is the best recipe for chocolate lava cake?"               → DOMAIN: general
+  "Who would win in a fight between a lion and a tiger?"           → DOMAIN: general
 
 Respond in exactly this format:
 DOMAIN: <domain>
