@@ -40,11 +40,11 @@ The Critic → Researcher loop runs up to 3 times before proceeding regardless o
 
 | Agent | Owner | File |
 |---|---|---|
-| Query Rewriter | Bose4life | `agents/query_rewriter.py` |
+| Query Rewriter | Bwosley | `agents/query_rewriter.py` |
 | Domain Router | Luke | `agents/router.py` |
 | Memory Agent | Sid | `agents/memory_agent.py` |
 | Planner | Hamza | `agents/planner.py` |
-| Researcher | Bose4life | `agents/researcher.py` |
+| Researcher | Bwosley | `agents/researcher.py` |
 | Fact Checker | Hamza | `agents/fact_checker.py` |
 | Critic | Luke | `agents/critic.py` |
 | Presenter | Sid | `agents/presenter.py` |
@@ -145,5 +145,5 @@ AGI-Simulation/
 |---|---|
 | Sid Kumar | Memory Agent, Presenter, Graph Integration |
 | Hamza Malik | Planner, Fact Checker |
-| Bose4life | Researcher, Query Rewriter |
+| Bwosley | Researcher, Query Rewriter |
 | Luke Immel | Critic, Domain Router |
